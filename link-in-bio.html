@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alex Rivera - Digital Creator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ==================== BRAND COLORS HERE ==================== */
+        :root {
+            --primary-color: #667eea;
+            --secondary-color: #764ba2;
+            --accent-color: #f093fb;
+            --background-primary: #0f0f23;
+            --background-secondary: #1a1a2e;
+            --background-card: rgba(255, 255, 255, 0.08);
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0b8;
+            --border-color: rgba(255, 255, 255, 0.12);
+            --gradient-main: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            --gradient-accent: linear-gradient(135deg, var(--accent-color), var(--primary-color));
+            --shadow-glow: 0 8px 32px rgba(102, 126, 234, 0.15);
+        }
+        /* ============================================================ */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--background-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Background Pattern */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(102, 126, 234, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(240, 147, 251, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(118, 75, 162, 0.1) 0%, transparent 50%);
+            z-index: -1;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.05) rotate(5deg); }
+        }
+
+        .container {
+            max-width: 480px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Hero Section - Behance Style */
+        .hero {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 1px;
+            background: var(--gradient-main);
+            opacity: 0.6;
+        }
+
+        /* ==================== EDIT PROFILE IMAGE ==================== */
+        .profile-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: var(--gradient-main);
+            margin: 0 auto 1.5rem;
+            position: relative;
+            overflow: hidden;
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .profile-image:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-glow);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .profile-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .profile-image:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Placeholder for profile image */
+        .profile-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: white;
+            background: var(--gradient-main);
+        }
+        /* ============================================================ */
+
+        /* ==================== EDIT PROFILE NAME ==================== */
+        .profile-name {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            background: var(--gradient-main);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.02em;
+        }
+        /* ============================================================ */
+
+        /* ==================== EDIT BIO TAGLINE ==================== */
+        .profile-bio {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            max-width: 300px;
+            margin: 0 auto 0.5rem;
+            line-height: 1.5;
+        }
+        /* ========================================================== */
+
+        .profile-location {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            opacity: 0.8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        /* Links Section */
+        .links-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        /* ==================== ADD/REMOVE LINKS ==================== */
+        .link-item {
+            background: var(--background-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 1rem 1.5rem;
+            text-decoration: none;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .link-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .link-item:hover::before {
+            left: 100%;
+        }
+
+        .link-item:hover {
+            transform: translateY(-2px);
+            border-color: rgba(102, 126, 234, 0.5);
+            background: rgba(255, 255, 255, 0.12);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .link-item:active {
+            transform: translateY(0);
+        }
+
+        .link-icon {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            flex-shrink: 0;
+        }
+
+        .link-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .link-title {
+            font-weight: 600;
+            font-size: 1rem;
+            margin-bottom: 0.1rem;
+        }
+
+        .link-description {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            opacity: 0.8;
+        }
+
+        .link-arrow {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            opacity: 0.6;
+            transition: all 0.3s ease;
+        }
+
+        .link-item:hover .link-arrow {
+            opacity: 1;
+            transform: translateX(4px);
+        }
+        /* ========================================================== */
+
+        /* Social Media Icons Grid */
+        .social-section {
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-title {
+            text-align: center;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+        }
+
+        .social-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .social-item {
+            aspect-ratio: 1;
+            background: var(--background-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            font-size: 1.2rem;
+        }
+
+        .social-item:hover {
+            transform: translateY(-2px);
+            border-color: rgba(102, 126, 234, 0.5);
+            background: rgba(255, 255, 255, 0.12);
+            box-shadow: var(--shadow-glow);
+        }
+
+        /* Individual social media colors */
+        .social-instagram:hover { color: #E4405F; border-color: rgba(228, 64, 95, 0.5); }
+        .social-twitter:hover { color: #1DA1F2; border-color: rgba(29, 161, 242, 0.5); }
+        .social-linkedin:hover { color: #0077B5; border-color: rgba(0, 119, 181, 0.5); }
+        .social-github:hover { color: #333; border-color: rgba(255, 255, 255, 0.5); }
+        .social-youtube:hover { color: #FF0000; border-color: rgba(255, 0, 0, 0.5); }
+        .social-tiktok:hover { color: #000; border-color: rgba(255, 255, 255, 0.5); }
+        .social-snapchat:hover { color: #FFFC00; border-color: rgba(255, 252, 0, 0.5); }
+        .social-pinterest:hover { color: #BD081C; border-color: rgba(189, 8, 28, 0.5); }
+        .social-discord:hover { color: #7289DA; border-color: rgba(114, 137, 218, 0.5); }
+        .social-twitch:hover { color: #9146FF; border-color: rgba(145, 70, 255, 0.5); }
+        .social-spotify:hover { color: #1DB954; border-color: rgba(29, 185, 84, 0.5); }
+        .social-facebook:hover { color: #1877F2; border-color: rgba(24, 119, 242, 0.5); }
+        .social-telegram:hover { color: #26A5E4; border-color: rgba(38, 165, 228, 0.5); }
+        .social-whatsapp:hover { color: #25D366; border-color: rgba(37, 211, 102, 0.5); }
+        .social-reddit:hover { color: #FF4500; border-color: rgba(255, 69, 0, 0.5); }
+
+        /* Footer */
+        footer {
+            margin-top: auto;
+            padding-top: 2rem;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        /* ==================== FOOTER TEXT ==================== */
+        .footer-text {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            opacity: 0.6;
+        }
+
+        .footer-text a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .footer-text a:hover {
+            opacity: 0.8;
+        }
+        /* ===================================================== */
+
+        /* Responsive Design */
+        @media (max-width: 480px) {
+            .container {
+                padding: 1.5rem 1rem;
+            }
+
+            .profile-image {
+                width: 100px;
+                height: 100px;
+            }
+
+            .profile-name {
+                font-size: 1.75rem;
+            }
+
+            .link-item {
+                padding: 0.875rem 1.25rem;
+            }
+
+            .social-grid {
+                gap: 0.75rem;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .social-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        /* Loading Animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero,
+        .link-item,
+        .social-section,
+        footer {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .link-item:nth-child(1) { animation-delay: 0.1s; }
+        .link-item:nth-child(2) { animation-delay: 0.2s; }
+        .link-item:nth-child(3) { animation-delay: 0.3s; }
+        .link-item:nth-child(4) { animation-delay: 0.4s; }
+        .link-item:nth-child(5) { animation-delay: 0.5s; }
+        .link-item:nth-child(6) { animation-delay: 0.6s; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Hero Section -->
+        <div class="hero">
+            <!-- ==================== EDIT PROFILE IMAGE ==================== -->
+            <div class="profile-image">
+                <!-- Replace with actual image: <img src="your-photo.jpg" alt="Profile"> -->
+                <div class="profile-placeholder">
+                    <i class="fas fa-user"></i>
+                </div>
+            </div>
+            <!-- ============================================================ -->
+
+            <!-- ==================== EDIT PROFILE NAME ==================== -->
+            <h1 class="profile-name">Alex Rivera</h1>
+            <!-- ============================================================ -->
+
+            <!-- ==================== EDIT BIO TAGLINE ==================== -->
+            <p class="profile-bio">Digital Creator & Brand Strategist helping businesses grow through creative content</p>
+            <!-- ========================================================== -->
+
+            <p class="profile-location">
+                <i class="fas fa-map-marker-alt"></i>
+                San Francisco, CA
+            </p>
+        </div>
+
+        <!-- Links Section -->
+        <div class="links-section">
+            <!-- ==================== ADD/REMOVE LINKS ==================== -->
+            <a href="https://your-website.com" class="link-item">
+                <div class="link-icon">
+                    <i class="fas fa-globe"></i>
+                </div>
+                <div class="link-content">
+                    <div class="link-title">My Portfolio</div>
+                    <div class="link-description">View my latest creative work</div>
+                </div>
+                <div class="link-arrow">
+                    <i class="fas fa-arrow-right"></i>
+                </div>
+            </a>
+
+            <a href="https://your-store.com" class="link-item">
+                <div class="link-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                </div>
+                <div class="link-content">
+                    <div class="link-title">Shop My Store</div>
+                    <div class="link-description">Exclusive products & merch</div>
+                </div>
+                <div class="link-arrow">
+                    <i class="fas fa-arrow-right"></i>
+                </div>
+            </a>
+
+            <a href="https://your-course.com" class="link-item">
+                <div class="link-icon">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <div class="link-content">
+                    <div class="link-title">Free Course</div>
+                    <div class="link-description">Learn digital marketing in 7 days</div>
+                </div>
+                <div class="link-arrow">
+                    <i class="fas fa-arrow-right"></i>
+                </div>
+            </a>
+
+            <a href="https://your-newsletter.com" class="link-item">
+                <div class="link-icon">
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <div class="link-content">
+                    <div class="link-title">Newsletter</div>
+                    <div class="link-description">Weekly insights & tips</div>
+                </div>
+                <div class="link-arrow">
+                    <i class="fas fa-arrow-right"></i>
+                </div>
+            </a>
+
+            <a href="https://calendly.com/yourusername" class="link-item">
+                <div class="link-icon">
+                    <i class="fas fa-calendar"></i>
+                </div>
+                <div class="link-content">
+                    <div class="link-title">Book a Call</div>
+                    <div class="link-description">30-minute strategy session</div>
+                </div>
+                <div class="link-arrow">
+                    <i class="fas fa-arrow-right"></i>
+                </div>
+            </a>
+
+            <a href="https://your-blog.com" class="link-item">
+                <div class="link-icon">
+                    <i class="fas fa-blog"></i>
+                </div>
+                <div class="link-content">
+                    <div class="link-title">Blog</div>
+                    <div class="link-description">Latest articles & tutorials</div>
+                </div>
+                <div class="link-arrow">
+                    <i class="fas fa-arrow-right"></i>
+                </div>
+            </a>
+            <!-- ========================================================== -->
+        </div>
+
+        <!-- Social Media Section -->
+        <div class="social-section">
+            <h2 class="social-title">Connect with me</h2>
+            <div class="social-grid">
+                <!-- Top 15 Social Media Icons -->
+                <a href="https://instagram.com/yourusername" class="social-item social-instagram" target="_blank">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://twitter.com/yourusername" class="social-item social-twitter" target="_blank">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="https://linkedin.com/in/yourusername" class="social-item social-linkedin" target="_blank">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="https://github.com/yourusername" class="social-item social-github" target="_blank">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://youtube.com/@yourusername" class="social-item social-youtube" target="_blank">
+                    <i class="fab fa-youtube"></i>
+                </a>
+                <a href="https://tiktok.com/@yourusername" class="social-item social-tiktok" target="_blank">
+                    <i class="fab fa-tiktok"></i>
+                </a>
+                <a href="https://snapchat.com/add/yourusername" class="social-item social-snapchat" target="_blank">
+                    <i class="fab fa-snapchat"></i>
+                </a>
+                <a href="https://pinterest.com/yourusername" class="social-item social-pinterest" target="_blank">
+                    <i class="fab fa-pinterest"></i>
+                </a>
+                <a href="https://discord.gg/yourinvite" class="social-item social-discord" target="_blank">
+                    <i class="fab fa-discord"></i>
+                </a>
+                <a href="https://twitch.tv/yourusername" class="social-item social-twitch" target="_blank">
+                    <i class="fab fa-twitch"></i>
+                </a>
+                <a href="https://spotify.com/artist/yourid" class="social-item social-spotify" target="_blank">
+                    <i class="fab fa-spotify"></i>
+                </a>
+                <a href="https://facebook.com/yourusername" class="social-item social-facebook" target="_blank">
+                    <i class="fab fa-facebook"></i>
+                </a>
+                <a href="https://t.me/yourusername" class="social-item social-telegram" target="_blank">
+                    <i class="fab fa-telegram"></i>
+                </a>
+                <a href="https://wa.me/yournumber" class="social-item social-whatsapp" target="_blank">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+                <a href="h
