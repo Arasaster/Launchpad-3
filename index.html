@@ -654,16 +654,17 @@
                 <h3 class="form-title">Get Your Free Package</h3>
                 <p class="form-subtitle">Join thousands of professionals who receive our premium resources and newsletter</p>
 
-                <form name="launchpad3" method="POST" data-netlify="true">
+<form id="emailForm" name="launchpad3" method="POST" data-netlify="true">
   <input type="hidden" name="form-name" value="launchpad3">
 
   <div class="input-group">
-    <input type="email" name="email" placeholder="Enter your email address" id="emailInput" required>
+    <input type="email" class="input-field" placeholder="Enter your email address" 
+           id="emailInput" name="email" required>
   </div>
   
   <div class="checkbox-group">
     <label class="custom-checkbox">
-      <input type="checkbox" name="consent" id="consentCheckbox" required>
+      <input type="checkbox" id="consentCheckbox" name="consent" required>
       <span class="checkmark"></span>
     </label>
     <label for="consentCheckbox" class="checkbox-label">
@@ -674,7 +675,7 @@
   <button type="submit" class="submit-button" id="submitButton">
     <span>Get Free Package</span>
   </button>
-                </form>
+</form>
                 
             </div>
         </div>
