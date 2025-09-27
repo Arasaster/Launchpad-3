@@ -654,25 +654,7 @@
                 <h3 class="form-title">Get Your Free Package</h3>
                 <p class="form-subtitle">Join thousands of professionals who receive our premium resources and newsletter</p>
                 
-                <form id="emailForm" name="launchpad3" data-netlify="true" netlify>
-                    <div class="input-group">
-                        <input type="email" class="input-field" placeholder="Enter your email address" id="emailInput" required>
-                    </div>
-                    
-                    <div class="checkbox-group">
-                        <label class="custom-checkbox">
-                            <input type="checkbox" id="consentCheckbox" required>
-                            <span class="checkmark"></span>
-                        </label>
-                        <label for="consentCheckbox" class="checkbox-label">
-                            I agree to receive the free package and newsletter updates. This confirmation is required to process your request and keep you updated with our latest resources.
-                        </label>
-                    </div>
-                    
-                    <button type="submit" class="submit-button" id="submitButton">
-                        <span>Get Free Package</span>
-                    </button>
-                </form>
+                
             </div>
         </div>
     </section>
@@ -683,7 +665,27 @@
             <span class="close" onclick="closeModal()">&times;</span>
             <div class="modal-image" id="modalImage">
                 <img src"#">
-            </div>
+            </d<form name="launchpad3" method="POST" data-netlify="true">
+  <input type="hidden" name="form-name" value="launchpad3">
+
+  <div class="input-group">
+    <input type="email" name="email" placeholder="Enter your email address" id="emailInput" required>
+  </div>
+  
+  <div class="checkbox-group">
+    <label class="custom-checkbox">
+      <input type="checkbox" name="consent" id="consentCheckbox" required>
+      <span class="checkmark"></span>
+    </label>
+    <label for="consentCheckbox" class="checkbox-label">
+      I agree to receive the free package and newsletter updates. This confirmation is required to process your request and keep you updated with our latest resources.
+    </label>
+  </div>
+  
+  <button type="submit" class="submit-button" id="submitButton">
+    <span>Get Free Package</span>
+  </button>
+            </form>
         </div>
     </div>
 
